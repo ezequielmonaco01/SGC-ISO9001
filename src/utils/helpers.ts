@@ -281,19 +281,19 @@ export const exportToCSV = <T extends Record<string, unknown>>(
 export const validateDocumentStructure = (doc: Record<string, unknown>): string[] => {
   const errors: string[] = [];
   
-  if (!doc.title || !isNotEmpty(doc.title)) {
+  if (!doc.title || !isNotEmpty(String(doc.title))) {
     errors.push('El título es obligatorio');
   }
   
-  if (!doc.author || !isNotEmpty(doc.author)) {
+  if (!doc.author || !isNotEmpty(String(doc.author))) {
     errors.push('El autor es obligatorio');
   }
   
-  if (!doc.fileName || !isNotEmpty(doc.fileName)) {
+  if (!doc.fileName || !isNotEmpty(String(doc.fileName))) {
     errors.push('El nombre del archivo es obligatorio');
   }
   
-  if (!doc.version || !isNotEmpty(doc.version)) {
+  if (!doc.version || !isNotEmpty(String(doc.version))) {
     errors.push('La versión es obligatoria');
   }
   

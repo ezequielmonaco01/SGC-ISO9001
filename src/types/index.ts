@@ -127,133 +127,165 @@ export interface KPI {
   lastUpdate: string;
 }
 
-// Enums para mayor consistencia de datos
+// Constantes para mayor consistencia de datos
 
-export enum Sector {
-  DESARROLLO = 'Desarrollo',
-  QA = 'QA',
-  ADMINISTRACION = 'Administración',
-  RRHH = 'RRHH',
-  DIRECCION = 'Dirección',
-  COMERCIAL = 'Comercial'
-}
+export const Sector = {
+  DESARROLLO: 'Desarrollo',
+  QA: 'QA',
+  ADMINISTRACION: 'Administración',
+  RRHH: 'RRHH',
+  DIRECCION: 'Dirección',
+  COMERCIAL: 'Comercial'
+} as const;
 
-export enum DocumentType {
-  PROCEDIMIENTO = 'Procedimiento',
-  POLITICA = 'Política',
-  MANUAL = 'Manual',
-  INSTRUCTIVO = 'Instructivo',
-  FORMATO = 'Formato',
-  REGISTRO = 'Registro'
-}
+export type Sector = typeof Sector[keyof typeof Sector];
 
-export enum DocumentStatus {
-  ACTIVO = 'Activo',
-  EN_REVISION = 'En Revisión',
-  OBSOLETO = 'Obsoleto',
-  BORRADOR = 'Borrador'
-}
+export const DocumentType = {
+  PROCEDIMIENTO: 'Procedimiento',
+  POLITICA: 'Política',
+  MANUAL: 'Manual',
+  INSTRUCTIVO: 'Instructivo',
+  FORMATO: 'Formato',
+  REGISTRO: 'Registro'
+} as const;
 
-export enum ProcessStatus {
-  ACTIVO = 'Activo',
-  EN_REVISION = 'En Revisión',
-  OBSOLETO = 'Obsoleto',
-  SUSPENDIDO = 'Suspendido'
-}
+export type DocumentType = typeof DocumentType[keyof typeof DocumentType];
 
-export enum RiskCategory {
-  OPERACIONAL = 'Operacional',
-  FINANCIERO = 'Financiero',
-  TECNOLOGICO = 'Tecnológico',
-  REPUTACIONAL = 'Reputacional',
-  LEGAL = 'Legal',
-  AMBIENTAL = 'Ambiental'
-}
+export const DocumentStatus = {
+  ACTIVO: 'Activo',
+  EN_REVISION: 'En Revisión',
+  OBSOLETO: 'Obsoleto',
+  BORRADOR: 'Borrador'
+} as const;
 
-export enum OpportunityCategory {
-  MEJORA_PROCESO = 'Mejora de Proceso',
-  INNOVACION = 'Innovación',
-  EXPANSION = 'Expansión',
-  EFICIENCIA = 'Eficiencia',
-  CLIENTE = 'Cliente',
-  TALENTO = 'Talento'
-}
+export type DocumentStatus = typeof DocumentStatus[keyof typeof DocumentStatus];
 
-export enum RiskLevel {
-  MUY_BAJO = 'Muy Bajo',
-  BAJO = 'Bajo',
-  MEDIO = 'Medio',
-  ALTO = 'Alto',
-  MUY_ALTO = 'Muy Alto'
-}
+export const ProcessStatus = {
+  ACTIVO: 'Activo',
+  EN_REVISION: 'En Revisión',
+  OBSOLETO: 'Obsoleto',
+  SUSPENDIDO: 'Suspendido'
+} as const;
 
-export enum Priority {
-  BAJA = 'Baja',
-  MEDIA = 'Media',
-  ALTA = 'Alta',
-  CRITICA = 'Crítica'
-}
+export type ProcessStatus = typeof ProcessStatus[keyof typeof ProcessStatus];
 
-export enum RiskStatus {
-  IDENTIFICADO = 'Identificado',
-  EN_TRATAMIENTO = 'En Tratamiento',
-  MITIGADO = 'Mitigado',
-  CERRADO = 'Cerrado'
-}
+export const RiskCategory = {
+  OPERACIONAL: 'Operacional',
+  FINANCIERO: 'Financiero',
+  TECNOLOGICO: 'Tecnológico',
+  REPUTACIONAL: 'Reputacional',
+  LEGAL: 'Legal',
+  AMBIENTAL: 'Ambiental'
+} as const;
 
-export enum OpportunityStatus {
-  IDENTIFICADA = 'Identificada',
-  EN_EVALUACION = 'En Evaluación',
-  EN_IMPLEMENTACION = 'En Implementación',
-  IMPLEMENTADA = 'Implementada',
-  CANCELADA = 'Cancelada'
-}
+export type RiskCategory = typeof RiskCategory[keyof typeof RiskCategory];
 
-export enum PDCAPhase {
-  PLAN = 'Plan',
-  DO = 'Do',
-  CHECK = 'Check',
-  ACT = 'Act'
-}
+export const OpportunityCategory = {
+  MEJORA_PROCESO: 'Mejora de Proceso',
+  INNOVACION: 'Innovación',
+  EXPANSION: 'Expansión',
+  EFICIENCIA: 'Eficiencia',
+  CLIENTE: 'Cliente',
+  TALENTO: 'Talento'
+} as const;
 
-export enum PDCAStatus {
-  PENDIENTE = 'Pendiente',
-  EN_PROGRESO = 'En Progreso',
-  COMPLETADO = 'Completado',
-  BLOQUEADO = 'Bloqueado',
-  PLANIFICADO = 'Planificado'
-}
+export type OpportunityCategory = typeof OpportunityCategory[keyof typeof OpportunityCategory];
 
-export enum Severity {
-  MENOR = 'Menor',
-  MODERADA = 'Moderada',
-  MAYOR = 'Mayor',
-  CRITICA = 'Crítica'
-}
+export const RiskLevel = {
+  MUY_BAJO: 'Muy Bajo',
+  BAJO: 'Bajo',
+  MEDIO: 'Medio',
+  ALTO: 'Alto',
+  MUY_ALTO: 'Muy Alto'
+} as const;
 
-export enum NonConformitySource {
-  AUDITORIA_INTERNA = 'Auditoría Interna',
-  AUDITORIA_EXTERNA = 'Auditoría Externa',
-  REVISION_DIRECCION = 'Revisión por la Dirección',
-  QUEJA_CLIENTE = 'Queja de Cliente',
-  AUTODETECCION = 'Autodetección',
-  MEJORA_CONTINUA = 'Mejora Continua'
-}
+export type RiskLevel = typeof RiskLevel[keyof typeof RiskLevel];
 
-export enum NonConformityStatus {
-  ABIERTA = 'Abierta',
-  EN_ANALISIS = 'En Análisis',
-  EN_TRATAMIENTO = 'En Tratamiento',
-  EN_VERIFICACION = 'En Verificación',
-  CERRADA = 'Cerrada'
-}
+export const Priority = {
+  BAJA: 'Baja',
+  MEDIA: 'Media',
+  ALTA: 'Alta',
+  CRITICA: 'Crítica'
+} as const;
 
-export enum ActionStatus {
-  PENDIENTE = 'Pendiente',
-  EN_PROGRESO = 'En Progreso',
-  COMPLETADA = 'Completada',
-  VENCIDA = 'Vencida'
-}
+export type Priority = typeof Priority[keyof typeof Priority];
+
+export const RiskStatus = {
+  IDENTIFICADO: 'Identificado',
+  EN_TRATAMIENTO: 'En Tratamiento',
+  MITIGADO: 'Mitigado',
+  CERRADO: 'Cerrado'
+} as const;
+
+export type RiskStatus = typeof RiskStatus[keyof typeof RiskStatus];
+
+export const OpportunityStatus = {
+  IDENTIFICADA: 'Identificada',
+  EN_EVALUACION: 'En Evaluación',
+  EN_IMPLEMENTACION: 'En Implementación',
+  IMPLEMENTADA: 'Implementada',
+  CANCELADA: 'Cancelada'
+} as const;
+
+export type OpportunityStatus = typeof OpportunityStatus[keyof typeof OpportunityStatus];
+
+export const PDCAPhase = {
+  PLAN: 'Plan',
+  DO: 'Do',
+  CHECK: 'Check',
+  ACT: 'Act'
+} as const;
+
+export type PDCAPhase = typeof PDCAPhase[keyof typeof PDCAPhase];
+
+export const PDCAStatus = {
+  PENDIENTE: 'Pendiente',
+  EN_PROGRESO: 'En Progreso',
+  COMPLETADO: 'Completado',
+  BLOQUEADO: 'Bloqueado',
+  PLANIFICADO: 'Planificado'
+} as const;
+
+export type PDCAStatus = typeof PDCAStatus[keyof typeof PDCAStatus];
+
+export const Severity = {
+  MENOR: 'Menor',
+  MODERADA: 'Moderada',
+  MAYOR: 'Mayor',
+  CRITICA: 'Crítica'
+} as const;
+
+export type Severity = typeof Severity[keyof typeof Severity];
+
+export const NonConformitySource = {
+  AUDITORIA_INTERNA: 'Auditoría Interna',
+  AUDITORIA_EXTERNA: 'Auditoría Externa',
+  REVISION_DIRECCION: 'Revisión por la Dirección',
+  QUEJA_CLIENTE: 'Queja de Cliente',
+  AUTODETECCION: 'Autodetección',
+  MEJORA_CONTINUA: 'Mejora Continua'
+} as const;
+
+export type NonConformitySource = typeof NonConformitySource[keyof typeof NonConformitySource];
+
+export const NonConformityStatus = {
+  ABIERTA: 'Abierta',
+  EN_ANALISIS: 'En Análisis',
+  EN_TRATAMIENTO: 'En Tratamiento',
+  EN_VERIFICACION: 'En Verificación',
+  CERRADA: 'Cerrada'
+} as const;
+
+export type NonConformityStatus = typeof NonConformityStatus[keyof typeof NonConformityStatus];
+
+export const ActionStatus = {
+  PENDIENTE: 'Pendiente',
+  EN_PROGRESO: 'En Progreso',
+  COMPLETADA: 'Completada',
+  VENCIDA: 'Vencida'
+} as const;
+
+export type ActionStatus = typeof ActionStatus[keyof typeof ActionStatus];
 
 // Tipos para el contexto de la aplicación
 export interface AppState {

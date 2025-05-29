@@ -30,7 +30,6 @@ import {
   Tab,
   Tooltip,
   Alert,
-  Divider,
   Stack,
 } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
@@ -386,7 +385,7 @@ const RiskMatrix: React.FC = () => {
                           verticalAlign: 'top'
                         }}
                       >
-                        {cellRisks.map((risk, index) => (
+                        {cellRisks.map((risk: Risk, index: number) => (
                           <Chip
                             key={risk.id}
                             label={`R${index + 1}`}
