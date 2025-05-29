@@ -124,15 +124,23 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
 
   // Contenido del drawer
   const drawerContent = (
-    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <Box 
+      sx={{ 
+        height: '100%', 
+        display: 'flex', 
+        flexDirection: 'column',
+        backgroundColor: theme.palette.background.paper,
+      }}
+    >
       {/* Header del drawer */}
       <Box
         sx={{
-          p: 2,
+          p: 2.5,
           display: 'flex',
           alignItems: 'center',
           backgroundColor: theme.palette.primary.main,
           color: theme.palette.primary.contrastText,
+          minHeight: 64, // Igual altura que el AppBar
         }}
       >
         <QualityIcon sx={{ mr: 2, fontSize: 32 }} />
@@ -146,7 +154,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
         </Box>
       </Box>
 
-      <Divider />
+      <Divider sx={{ margin: 0 }} />
 
       {/* Lista de navegación */}
       <List sx={{ flexGrow: 1, px: 1, py: 2 }}>
@@ -198,7 +206,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
         ))}
       </List>
 
-      <Divider />
+      <Divider sx={{ margin: 0 }} />
 
       {/* Footer del drawer */}
       <Box sx={{ p: 2 }}>
@@ -214,51 +222,15 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
   );
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-      {/* AppBar */}
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
-          ml: { md: `${DRAWER_WIDTH}px` },
-          zIndex: theme.zIndex.drawer + 1,
-          borderRadius: 0
-        }}
-      >
-        <Toolbar>
-          {/* Botón de menú para móviles */}
-          <IconButton
-            color="inherit"
-            aria-label="abrir menú de navegación"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-
-          {/* Título de la página actual */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {navigationItems.find(item => item.id === currentPage)?.label || 'SGC'}
-          </Typography>
-
-          {/* Toggle de tema */}
-          <Tooltip title={state.darkMode ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}>
-            <IconButton
-              color="inherit"
-              onClick={handleThemeToggle}
-              aria-label="cambiar tema"
-            >
-              {state.darkMode ? <LightModeIcon /> : <DarkModeIcon />}
-            </IconButton>
-          </Tooltip>
-        </Toolbar>
-      </AppBar>
-
+    <Box sx={{ display: 'flex', minHeight: '100vh', overflow: 'hidden', borderRadius: 0 }}>
       {/* Drawer de navegación */}
       <Box
         component="nav"
-        sx={{ width: { md: DRAWER_WIDTH }, flexShrink: { md: 0 } }}
+        sx={{ 
+          width: { md: DRAWER_WIDTH }, 
+          flexShrink: { md: 0 },
+          zIndex: theme.zIndex.drawer,
+        }}
       >
         {/* Drawer temporal para móviles */}
         <Drawer
@@ -273,6 +245,7 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: DRAWER_WIDTH,
+              border: 'none',
             },
           }}
         >
@@ -287,6 +260,9 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
             '& .MuiDrawer-paper': {
               boxSizing: 'border-box',
               width: DRAWER_WIDTH,
+              border: 'none',
+              borderRight: `1px solid ${theme.palette.divider}`,
+              borderRadius: 0
             },
           }}
           open
@@ -295,22 +271,73 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onPageChange }) 
         </Drawer>
       </Box>
 
-      {/* Contenido principal */}
+      {/* Contenedor principal con AppBar y contenido */}
       <Box
-        component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          display: 'flex',
+          flexDirection: 'column',
           width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
           minHeight: '100vh',
-          backgroundColor: theme.palette.background.default,
+          overflow: 'hidden',
         }}
       >
-        {/* Spacer para el AppBar */}
-        <Toolbar />
-        
-        {/* Contenido de la página */}
-        {children}
+        {/* AppBar */}
+        <AppBar
+          position="static"
+          elevation={0}
+          sx={{
+            zIndex: theme.zIndex.drawer - 1,
+            borderBottom: `1px solid ${theme.palette.divider}`,
+            backgroundColor: theme.palette.primary.main,
+            borderRadius: 0
+          }}
+        >
+          <Toolbar>
+            {/* Botón de menú para móviles */}
+            <IconButton
+              color="inherit"
+              aria-label="abrir menú de navegación"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { md: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            {/* Título de la página actual */}
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              {navigationItems.find(item => item.id === currentPage)?.label || 'SGC'}
+            </Typography>
+
+            {/* Toggle de tema */}
+            <Tooltip title={state.darkMode ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}>
+              <IconButton
+                color="inherit"
+                onClick={handleThemeToggle}
+                aria-label="cambiar tema"
+              >
+                {state.darkMode ? <LightModeIcon /> : <DarkModeIcon />}
+              </IconButton>
+            </Tooltip>
+          </Toolbar>
+        </AppBar>
+
+        {/* Contenido principal */}
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            backgroundColor: theme.palette.background.default,
+            overflow: 'auto',
+            width: '100%',
+            maxWidth: '100%',
+          }}
+        >
+          {/* Contenido de la página */}
+          {children}
+        </Box>
       </Box>
     </Box>
   );
